@@ -2,6 +2,7 @@ from aiogram import types, Dispatcher
 from config import BOT
 from keyboards import questionnaire_inline_buttons
 
+
 async def questionnaire_start(call: types.CallbackQuery):
     await BOT.send_message(
         chat_id= call.from_user.id,

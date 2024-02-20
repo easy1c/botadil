@@ -19,9 +19,14 @@ async def start_keyboard():
         text="Phone",
         callback_data="phone"
     )
+    ban_button = InlineKeyboardMarkup(
+        text="Ban",
+        callback_data="ban"
+    )
 
     markup.add(questionnaire_button)
     markup.add(choice_button)
     markup.add(auto_button)
     markup.add(phone_button)
+    markup.add(ban_button)
     return markup
