@@ -11,6 +11,7 @@ class Database:
 
          self.connection.execute(sql_queries.CREATE_USER_TABLE_QUERY)
          self.connection.execute(sql_queries.CREATE_BAN_USER_TABLE_QUERY)
+         self.connection.execute(sql_queries.CREATE_PROFILE_USER_TABLE_QUERY)
 
          self.connection.commit()
 
@@ -50,3 +51,28 @@ class Database:
             (tg_id,)
         )
         self.connection.commit()
+
+    def sql_insert_profile(self, tg_id, nickname, bio, age, sing, photo):
+        self.cursor.execute(
+            sql_queries.INSERT_PROFILE_QUERY,
+            (None, tg_id, nickname,bio, age, sing, photo )
+        )
+        self.connection.commit()
+
+    def sql_select_profile(self, tg_id):
+            self.cursor.row_factory = lambda cursor, row: {
+                "id": row[0],
+                "telegram_id": row[1],
+                "nickname": row[2],
+                "bio": row[3],
+                "age": row[4],
+                "sing": row[5],
+                "auto":row[5],
+                "photo": row[6],
+            }
+
+            return self.cursor.execute(
+                sql_queries.SELECT_PROFILE_QUERY,
+                (tg_id,)
+            ).fetchone()
+
